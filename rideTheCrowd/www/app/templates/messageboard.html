@@ -1,0 +1,45 @@
+<ion-view>
+  <ion-nav-title>Message Board</ion-nav-title>
+  <ion-content padding="true">
+    <ion-refresher class="spinner-balanced" on-refresh="reload()"></ion-refresher>
+    <div class="text-center">
+      <ion-spinner class="spinner-balanced" ng-show="loading"></ion-spinner>
+    </div>
+    <div ng-show="!loading">
+
+      <ion-list>
+        <ion-item class="item-divider item-icon-right"><b>Inbox</b> <i class="icon ion-arrow-left-a"></i></ion-item>
+        <ion-item class="item-royal item-avatar item-icon-right">
+          <img src="img/user1.jpg"/>
+          Hi Folks!
+        </ion-item>
+        <ion-item class="item-royal item-avatar item-icon-right">
+          <img src="img/user2.jpg"/>
+          Hi there
+        </ion-item>
+        <ion-item class="item-royal item-avatar item-icon-right">
+          <img src="img/user1.jpg"/>
+          Let's cycle!
+        </ion-item>
+        <ion-item class="item-divider item-icon-right"><b>Sent</b> <i class="icon ion-arrow-right-a"></i></ion-item>
+      </ion-list>
+    </div>
+    <div class="list">
+
+  </div>
+  </ion-content>
+  <ion-footer-bar class="bar-stable">
+    <div class="buttons">
+      <div class="button button-clear" ng-disabled="loading" ng-click="map()">
+        <i class="icon ion-map"></i> Maps
+      </div>
+    </div>
+    <h1 class="title"></h1>
+    <div class="buttons">
+      <div class="button button-clear" ng-disabled="loading" ng-click="report()">
+        Report
+        <i class="icon ion-android-alert"></i>
+      </div>
+    </div>
+  </ion-footer-bar>
+</ion-view>

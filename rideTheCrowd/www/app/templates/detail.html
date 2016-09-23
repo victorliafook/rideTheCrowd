@@ -1,0 +1,72 @@
+<ion-view>
+  <ion-nav-title>Ride Details</ion-nav-title>
+  <ion-content padding="true">
+    <ion-refresher class="spinner-balanced" on-refresh="reload()"></ion-refresher>
+    <div class="text-center">
+      <ion-spinner class="spinner-balanced" ng-show="loading"></ion-spinner>
+    </div>
+    <div ng-show="!loading">
+
+      <div style="height: 200px; margin-bottom:10px; background:url('img/running.jpg') no-repeat center;" class="text-center">
+
+        <a class="avatar-floating right-down-corner" href="#">
+          <img src="img/ionic.png" class="" class="image"/>
+        </a>
+      </div>
+      <div class="text-center">
+          <h3>{{event.name}}</h3>
+          <a class="button icon">Join Ride</a>
+          <a ui-sref="chat({id: event.id})" class="button button-icon icon ion-chatboxes"></a>
+      </div>
+
+
+      <ion-list>
+        <ion-item class="item-divider item-icon-right"><b>Details</b> <i class="icon ion-ios-information"></i></ion-item>
+        <ion-item class="item-royal item-icon-right">
+          <b>Activity</b><br>
+          Cycling
+        </ion-item>
+        <ion-item class="item-royal item-icon-right">
+          <b>Date & Time</b><br>
+          20/09/2016 22:00
+        </ion-item>
+       <ion-item class="item-royal item-icon-right">
+          <b>{{event.city}}</b> <small>({{event.district}})</small>
+          {{event.street}} {{event.number}}<br>
+          {{event.zip}} {{event.city}}
+        </ion-item>
+        <ion-item class="item-royal item-icon-right">
+          <b>Ride History</b>
+          <i class="icon ion-ios-arrow-right"></i>
+        </ion-item>
+
+
+
+        <ion-item class="item-divider item-icon-right"><b>Contact</b> <i class="icon ion-chatboxes"></i></ion-item>
+        <ion-item class="item-icon-right" ng-click="call()">
+          Call us
+          <i class="icon ion-android-call"></i>
+        </ion-item>
+        <ion-item class="item-icon-right" ng-click="mail()">
+          Send us an e-mail
+          <i class="icon ion-ios-email"></i>
+        </ion-item>
+
+      </ion-list>
+    </div>
+  </ion-content>
+  <ion-footer-bar class="bar-stable">
+    <div class="buttons">
+      <div class="button button-clear" ng-disabled="loading" ng-click="map()">
+        <i class="icon ion-map"></i> Maps
+      </div>
+    </div>
+    <h1 class="title"></h1>
+    <div class="buttons">
+      <div class="button button-clear" ng-disabled="loading" ng-click="report()">
+        Report
+        <i class="icon ion-android-alert"></i>
+      </div>
+    </div>
+  </ion-footer-bar>
+</ion-view>

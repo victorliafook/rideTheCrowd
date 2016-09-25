@@ -6,17 +6,13 @@
  */
 
 module.exports = {
-
+  schema: true,
   attributes: {
     ride: {
       model: 'rides'
     },
     user: {
       model: 'users'
-    },
-    datetime: {
-      type: 'datetime',
-      required: true
     },
     text: {
       type: 'string',

@@ -6,7 +6,7 @@
  */
 
 module.exports = {
-
+  schema: true,
   attributes: {
     user: {
       model: 'users'

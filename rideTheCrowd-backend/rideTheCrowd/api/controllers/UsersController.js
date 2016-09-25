@@ -30,7 +30,11 @@ module.exports = {
 	login: function(req, res, next){
 		Users.findOneByEmail(req.param('email'), function(err, user){
 			if(err) return next(err);
-			if(!user){
+
+			var pass = req.param('password');
+			if(!user || pass != user.password){
+				var authError = {name: 'Authentication Error', message:'Incorrect Email or Password!'};
+				req.session.flash = {err: authError};
 				return res.redirect('/users/new/');
 			}
 			req.session.user = user;

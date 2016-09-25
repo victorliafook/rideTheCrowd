@@ -5,7 +5,8 @@ define([
   'controllers/dashboard',
   'controllers/results',
   'controllers/detail',
-  'controllers/user'
+  'controllers/user',
+  'controllers/rides'
 ], function (app) {
   'use strict';
   // definition of routes
@@ -30,7 +31,7 @@ define([
         })
         .state('detail', {
           url: '/detail/:id',
-          controller: 'DetailCtrl',
+          controller: 'RidesCtrl',
           templateUrl: 'app/templates/detail.html'
         })
         .state('chat', {

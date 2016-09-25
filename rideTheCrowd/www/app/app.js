@@ -9,7 +9,8 @@ define([
   var app = angular.module('app', [
     'ionic'
   ])
-    .constant("baseURL", "http://api.ridethecrowd.com.br/");
+  //  .constant("baseURL", "http://api.ridethecrowd.com.br/");
+  .constant("baseURL", "http://localhost:1337/");
   // return the app so you can require it in other components
   return app;
 });

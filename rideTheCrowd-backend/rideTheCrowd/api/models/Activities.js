@@ -6,7 +6,7 @@
  */
 
 module.exports = {
-
+  schema: true,
   attributes: {
     name:{
       type: 'string',
@@ -17,8 +17,7 @@ module.exports = {
       required: true
     },
     image:{
-      type: 'string',
-      required: true
+      type: 'string'
     }
   }
 };

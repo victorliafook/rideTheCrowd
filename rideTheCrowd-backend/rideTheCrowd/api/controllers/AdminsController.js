@@ -7,12 +7,9 @@
 
 module.exports = {
 	dashboard: function(req, res, next){
-		var user = null;
+		var user = req.session.user;
 		var userlist = [];
-		Users.findOne(req.session.user.id, function foundUser(err, userFound){
-			if(err) return next(err);
-			if(!userFound) return next();
-			user = userFound;
+
 			Users.find(function foundUsers(err, usersFound){
 				if(err) return next(err);
 				if(!usersFound) return next();
@@ -21,13 +18,13 @@ module.exports = {
 					user: user,
 					users: userlist
 				});
-			});
+
 		});
 
 	},
 	users: function(req, res, next){
 		var user = req.session.user;
-		console.log(user);
+
 		Users.find(function foundUsers(err, usersFound){
 			if(err) return next(err);
 			if(!usersFound) return next();
@@ -67,7 +64,7 @@ module.exports = {
 	reports: function(req, res, next){
 		var user = req.session.user;
 
-		Reports.find(function foundReports(err, reportsFound){
+		ReportEntries.find(function foundReports(err, reportsFound){
 			if(err) return next(err);
 			if(!reportsFound) return next();
 			reportslist = reportsFound;

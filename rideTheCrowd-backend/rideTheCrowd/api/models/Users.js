@@ -6,7 +6,7 @@
  */
 
 module.exports = {
-
+  schema: true,
   attributes: {
       firstname: {
         type: 'string',
@@ -18,16 +18,17 @@ module.exports = {
       email: {
         type: 'string',
         required: true,
-        email: true
+        email: true,
+        unique: true
       },
       password: {
         type: 'string',
         required: true
-      }
+      },
       bio: {
         type: 'string'
       },
-      photourl: {
+      photo: {
         type: 'string'
       },
       birthdate: {
@@ -51,7 +52,11 @@ module.exports = {
       },
       riding: {
         collection: 'rides',
-        via: riders
+        via: 'riders'
+      },
+      ridehistory :{
+        collection: 'rideHistories',
+        via: 'user'
       }
 
   }

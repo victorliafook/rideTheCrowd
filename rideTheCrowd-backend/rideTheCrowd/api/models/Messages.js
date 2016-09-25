@@ -8,7 +8,19 @@
 module.exports = {
 
   attributes: {
-
+    sender: {
+      model: 'users'
+    },
+    recipient: {
+      model: 'users'
+    },
+    datetime: {
+      type: 'datetime',
+      required: true
+    },
+    text: {
+      type: 'string',
+      required: true
+    }
   }
 };
-

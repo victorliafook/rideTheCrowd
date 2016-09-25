@@ -33,7 +33,17 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': {
-    view: 'static/home'
+    view: 'users/new',
+    locals: {
+      layout: 'login'
+    }
+  },
+
+  '/users/new' : {
+    view: 'users/new',
+    locals: {
+      layout: 'login'
+    }
   }
 
   /***************************************************************************

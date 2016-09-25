@@ -9,19 +9,18 @@ module.exports = {
 
   attributes: {
     name: {
-        type: 'string'
+      type: 'string',
+      required: true
     },
     description: {
       type: 'string',
       required: true
     },
     activity: {
-      model: 'activities',
-      required: true
+      model: 'activities'
     },
     owner: {
-      model: 'users',
-      required: true
+      model: 'users'
     },
     riders: {
       collection: 'users',
@@ -36,7 +35,7 @@ module.exports = {
       type: 'datetime',
       required: true
     },
-    photoUrl: {
+    photo: {
         type: 'string'
     },
     country: {
@@ -58,7 +57,7 @@ module.exports = {
         type: 'string'
     },
     repeating: {
-        type: boolean
+        type: 'boolean'
     },
     status: {
         type: 'string',

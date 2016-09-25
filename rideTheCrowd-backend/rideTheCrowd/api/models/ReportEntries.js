@@ -1,5 +1,5 @@
 /**
- * ChatEntries.js
+ * ReportEntries.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
@@ -15,7 +15,7 @@ module.exports = {
       model: 'users'
     },
     datetime: {
-      type: 'string',
+      type: 'datetime',
       required: true
     },
     text: {
@@ -23,4 +23,5 @@ module.exports = {
       required: true
     }
   }
+
 };

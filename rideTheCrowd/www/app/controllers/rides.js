@@ -11,7 +11,14 @@ define([
     'baseURL',
     function ($scope, $state, ridesService, baseURL) {
       console.log('entrou ride controller');
-      $scope.ride = ridesService.getRide(1);
+      $scope.ride = ridesService.getRide(1).$promise.then(
+          function(dados){
+            console.log(dados.name);
+          },
+          function(err){
+            console.log('erro: ' + JSON.stringify(err));
+          });
+
     }
   ]);
 });

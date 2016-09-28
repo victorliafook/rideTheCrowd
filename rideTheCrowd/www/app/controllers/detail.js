@@ -1,7 +1,7 @@
 /* global ionic, define */
 define([
   'app',
-  'services/event'
+  'services/rides'
 ], function (app) {
   'use strict';
 
@@ -10,40 +10,40 @@ define([
     '$stateParams',
     '$window',
     '$ionicPopup',
-    'eventService',
-    function ($scope, $stateParams, $window, $ionicPopup, eventService) {
+    'ridesService',
+    function ($scope, $stateParams, $window, $ionicPopup, ridesService) {
       $scope.loading = true;
-      eventService.getOne($stateParams.id).then(function (event) {
-        $scope.event = event;
+      ridesService.get($stateParams.id).then(function (ride) {
+        $scope.ride = ride;
       }).finally(function () {
         $scope.loading = false;
       });
 
       $scope.reload = function () {
-        eventService.getOne($stateParams.id).then(function (event) {
-          $scope.event = event;
+        ridesService.get($stateParams.id).then(function (ride) {
+          $scope.ride = ride;
         }).finally(function () {
           $scope.$broadcast('scroll.refreshComplete');
         });
       };
 
       $scope.call = function () {
-        $window.open('tel:' + $scope.event.contact.tel, '_system');
+        $window.open('tel:' + $scope.ride.contact.tel, '_system');
       };
 
       $scope.mail = function () {
-        $window.open('mailto:' + $scope.event.contact.email, '_system');
+        $window.open('mailto:' + $scope.ride.contact.email, '_system');
       };
 
       $scope.website = function () {
-        $window.open($scope.event.website, '_system');
+        $window.open($scope.ride.website, '_system');
       };
 
       $scope.map = function () {
         if (ionic.Platform.isIOS()) {
-          $window.open('maps://?q=' + $scope.event.lat + ',' + $scope.event.lng, '_system');
+          $window.open('maps://?q=' + $scope.ride.lat + ',' + $scope.ride.lng, '_system');
         } else {
-          $window.open('geo://0,0?q=' + $scope.event.lat + ',' + $scope.event.lng + '(' + $scope.event.name + '/' + $scope.event.city + ')&z=15', '_system');
+          $window.open('geo://0,0?q=' + $scope.ride.lat + ',' + $scope.ride.lng + '(' + $scope.ride.name + '/' + $scope.ride.city + ')&z=15', '_system');
         }
       };
 

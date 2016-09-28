@@ -62,6 +62,10 @@ module.exports = {
     status: {
         type: 'string',
         enum: ['active','inactive']
+    },
+    toJSON: function(){
+      var obj = this.toObject();
+      return obj;
     }
   }
 };

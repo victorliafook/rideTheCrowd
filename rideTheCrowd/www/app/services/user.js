@@ -1,11 +1,11 @@
 define([
   'app',
-  'services/data'
+  'services/user'
 ], function (app) {
   'use strict';
 
   app.service('userService', [
-    'dataService',
+    '$resource',
     function (dataService) {
       this.get = function () {
 

@@ -6,19 +6,19 @@
       <ion-spinner class="spinner-balanced" ng-show="loading"></ion-spinner>
     </div>
     <div ng-show="!loading">
-      <h3>{{event.name}}</h3>
-      <h4><b>{{event.city}}</b> <small>({{event.district}})</small></h4>
+      <h3>{{user.firstname}} {{user.surname}}</h3>
+      <h4><b>{{user.city}}</b> <small>({{user.country}})</small></h4>
       <br>
 
       <div class="text-center">
-        <img ng-src="{{event.image}}" class="image">
+        <img ng-src="{{user.photo}}" class="image">
       </div>
 
       <ion-list>
         <ion-item class="item-divider item-icon-right"><b>Address</b> <i class="icon ion-location"></i></ion-item>
         <ion-item>
-          {{event.street}} {{event.number}}<br>
-          {{event.zip}} {{event.city}}
+          {{user.street}} {{user.number}}<br>
+          {{user.zip}} {{user.city}}
         </ion-item>
       </ion-list>
       <br>

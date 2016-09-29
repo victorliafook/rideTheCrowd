@@ -1,66 +1,37 @@
 /* global ionic, define */
 define([
   'app',
-  'services/event'
+  'services/user',
+  'services/auth'
 ], function (app) {
   'use strict';
 
   app.controller('UserCtrl', [
     '$scope',
     '$stateParams',
-    '$window',
-    '$ionicPopup',
-    'eventService',
-    function ($scope, $stateParams, $window, $ionicPopup, eventService) {
-      $scope.loading = true;
-      if($stateParams.id != undefined){
-        eventService.getOne($stateParams.id).then(function (event) {
-          $scope.event = event;
-        }).finally(function () {
-          $scope.loading = false;
-        });
+    '$state',
+    '$localStorage',
+    'userService',
+    'authService',
+    function ($scope, $stateParams, $state, $localStorage, userService, authService) {
 
-        $scope.reload = function () {
-          eventService.getOne($stateParams.id).then(function (event) {
-            $scope.event = event;
-          }).finally(function () {
-            $scope.$broadcast('scroll.refreshComplete');
-          });
-        };
-      }
-      $scope.call = function () {
-        $window.open('tel:' + $scope.event.contact.tel, '_system');
-      };
-
-      $scope.mail = function () {
-        $window.open('mailto:' + $scope.event.contact.email, '_system');
-      };
-
-      $scope.website = function () {
-        $window.open($scope.event.website, '_system');
-      };
-
-      $scope.map = function () {
-        if (ionic.Platform.isIOS()) {
-          $window.open('maps://?q=' + $scope.event.lat + ',' + $scope.event.lng, '_system');
-        } else {
-          $window.open('geo://0,0?q=' + $scope.event.lat + ',' + $scope.event.lng + '(' + $scope.event.name + '/' + $scope.event.city + ')&z=15', '_system');
-        }
-      };
-
-      $scope.report = function () {
-        $ionicPopup.prompt({
-          scope: $scope,
-          title: '<span class="energized">Report an issue</span>',
-          subTitle: '<span class="stable">What\'s wrong or missing?</span>',
-          inputType: 'text',
-          inputPlaceholder: ''
-        }).then(function (res) {
-          if (res) {
-            // here connect to backend and send report
+        $scope.user = {};
+        console.log("userID: " + $localStorage.getObject("authUser", "{}").id);
+        userService.getUser($localStorage.getObject("authUser", "{}").id).$promise.then(
+          function(user){
+            $scope.user = user;
+            console.log("usuario ok: " + user.name);
+          },
+          function(err){
+            console.log("usuario erro : " + JSON.stringify(err));
           }
-        });
-      };
+        );
+        $scope.login = function(){
+          console.log(JSON.stringify($scope.user));
+          authService.setUser($scope.user);
+          authService.login();
+          $state.go('dashboard', {});
+        };
     }
-  ]);
+  ])
 });

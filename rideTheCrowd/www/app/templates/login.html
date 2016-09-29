@@ -1,0 +1,15 @@
+<ion-view>
+
+  <ion-content padding="true">
+    <ion-refresher class="spinner-balanced" on-refresh="reload()"></ion-refresher>
+    <div style="text-align:center;">
+        <input ng-model="user.id">
+				<button class="button button-balanced" ng-click="login()">
+          Login
+          <span>
+          <i class="icon ion-arrow-right-c"></i>
+					</span>
+        </button>
+    </div>
+  </ion-content>
+</ion-view>

@@ -16,7 +16,7 @@
       <div class="text-center">
           <h3>{{ride.name}}</h3>
           <a class="button icon">Join Ride</a>
-          <a ui-sref="chat({id: ride.id})" class="button button-icon icon ion-chatboxes"></a>
+          <a ui-sref="chat({{ride.id}})" class="button button-icon icon ion-chatboxes"></a>
       </div>
 
 
@@ -24,16 +24,16 @@
         <ion-item class="item-divider item-icon-right"><b>Details</b> <i class="icon ion-ios-information"></i></ion-item>
         <ion-item class="item-royal item-icon-right">
           <b>Activity</b><br>
-          Cycling
+          {{ride.activity.name}}
         </ion-item>
         <ion-item class="item-royal item-icon-right">
           <b>Date & Time</b><br>
-          20/09/2016 22:00
+          {{ride.datetime}}
         </ion-item>
        <ion-item class="item-royal item-icon-right">
-          <b>{{ride.city}}</b> <small>({{ride.district}})</small>
-          {{ride.street}} {{ride.number}}<br>
-          {{ride.zip}} {{ride.city}}
+          <b>{{ride.city}}</b> <small>({{ride.country}})</small>
+          {{ride.address}}<br>
+          {{ride.city}}
         </ion-item>
         <ion-item class="item-royal item-icon-right">
           <b>Ride History</b>

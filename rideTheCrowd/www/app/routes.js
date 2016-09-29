@@ -40,8 +40,8 @@ define([
           templateUrl: 'app/templates/detail.html'
         })
         .state('chat', {
-          url: '/detail/chat/:id',
-          controller: 'DetailCtrl',
+          url: '/detail/chat',
+          controller: 'RidesCtrl',
           templateUrl: 'app/templates/ridechat.html'
         })
         .state('findusers', {

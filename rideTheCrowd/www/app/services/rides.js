@@ -40,6 +40,22 @@ define([
 
           return deferred.promise;
         };
+        //Join a ride
+        this.join = function(rideId, userId){
+          return $resource(baseURL + "/rides/" + rideId + "/riders".save({
+            user: userId
+          }));
+        }
+
+        //Chat related functions
+
+        this.addChatEntry = function(text, rideId, userId){
+          console.log(text);
+            return $resource(baseURL + "/rides/" + rideId + "/chatentries").save({
+              user: userId,
+              text: text
+            });
+        };
     }
   ])
 });

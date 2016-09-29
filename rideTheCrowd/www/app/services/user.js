@@ -1,17 +1,21 @@
 define([
-  'app',
-  'services/user'
+  'app'
 ], function (app) {
   'use strict';
 
   app.service('userService', [
     '$resource',
-    function (dataService) {
-      this.get = function () {
+    'baseURL',
+    function ($resource, baseURL) {
+
+      this.get = function (id) {
 
 
-        return "";
+        return id;
       };
+      this.getUser = function(userId){
+          return $resource(baseURL + "/users/:id").get({id: userId});
+      }
     }
-  ]);
+  ])
 });

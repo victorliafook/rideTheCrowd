@@ -40,7 +40,7 @@ define([
           templateUrl: 'app/templates/detail.html'
         })
         .state('chat', {
-          url: '/detail/chat',
+          url: '/detail/chat/:id',
           controller: 'RidesCtrl',
           templateUrl: 'app/templates/ridechat.html'
         })

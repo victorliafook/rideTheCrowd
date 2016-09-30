@@ -15,7 +15,8 @@ define([
       };
       this.getUser = function(userId){
           return $resource(baseURL + "/users/:id").get({id: userId});
-      }
+      };
+
     }
   ])
 });

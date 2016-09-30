@@ -7,18 +7,20 @@ define([
   app.controller('RidesCtrl', [
     '$scope',
     '$state',
+    '$stateParams',
     'ridesService',
+    'userService',
     '$ionicLoading',
     '$localStorage',
     'baseURL',
-    function ($scope, $state, ridesService, $ionicLoading, $localStorage, baseURL) {
-      console.log('entrou ride controller');
-      $scope.activeUser = $localStorage.get("authUser",{});
+    function ($scope, $state, $stateParams, ridesService, userService, $ionicLoading, $localStorage, baseURL) {
+      console.log('entrou ride controller id:' + $stateParams.id);
+      $scope.activeUser = $localStorage.getObject("authUser",{});
       $scope.sendingNewChatEntry = false;
       $scope.newEntry = {};
       $scope.ride = {};
-
-      ridesService.getRide(1).$promise.then(
+      $scope.chatEntries = [];
+      ridesService.getRide($stateParams.id).$promise.then(
           function(dados){
             $scope.ride = dados;
             console.log(dados.name);
@@ -27,18 +29,34 @@ define([
             console.log('erro: ' + JSON.stringify(err));
         }
       );
+      $scope.refreshChat = function(){
+          ridesService.getChat($stateParams.id).$promise.then(
+              function(chatentries){
+                $scope.chatEntries = chatentries;
+              },
+              function(err){
+                console.log("Erro ao buscar chat: " + JSON.stringify(err));
+              }
+          )['finally'](function() {
 
-      $scope.chat = function(rideId){
-        $scope.chatEntries = [];
-         ridesService.getChat($scope.ride.id).$promise.then(
-            function(chatentries){
-              $scope.chatEntries = chatentries;
+          });
+      };
+
+      $scope.refreshChat();
+      $scope.getAvatar = function(userId){
+          userService.getUser(userId).$promise.then(
+            function(userData){
+              return userData.photo;
             },
             function(err){
-              console.log("Erro ao buscar chat: " + JSON.stringify(err));
+                console.log(JSON.stringify(err));
             }
-        );
-        $state.go('chat', {id:rideId});
+          );
+      }
+      $scope.goChat = function(){
+        console.log("buscar chat:" + $scope.ride.id);
+        $state.go('chat' , {id:$scope.ride.id});
+
       };
 
       $scope.addChatEntry = function(){
@@ -46,7 +64,7 @@ define([
         $ionicLoading.show({
             template: 'Sending...'
         });
-        ridesService.addChatEntry($scope.newEntry.text, $scope.ride.id, $scope.activeUser).$promise.then(
+        ridesService.addChatEntry($scope.newEntry.text, $scope.ride.id, $scope.activeUser.id).$promise.then(
             function(res){
                 console.log("Result: " + JSON.stringify(res));
             },
@@ -56,6 +74,8 @@ define([
         )['finally'](function() {
             $scope.sendingNewChatEntry = false;
             $ionicLoading.hide();
+            $scope.refreshChat();
+            $state.go($state.current, {}, {reload: true});
 
         });
       }

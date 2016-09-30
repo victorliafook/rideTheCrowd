@@ -10,10 +10,11 @@ define([
     '$scope',
     '$stateParams',
     '$state',
+    '$ionicHistory',
     '$localStorage',
     'userService',
     'authService',
-    function ($scope, $stateParams, $state, $localStorage, userService, authService) {
+    function ($scope, $stateParams, $state, $ionicHistory, $localStorage, userService, authService) {
 
         $scope.user = {};
         console.log("userID: " + $localStorage.getObject("authUser", "{}").id);
@@ -30,8 +31,11 @@ define([
           console.log(JSON.stringify($scope.user));
           authService.setUser($scope.user);
           authService.login();
+          $ionicHistory.nextViewOptions({ historyRoot: true });
           $state.go('dashboard', {});
         };
+
+        
     }
   ])
 });

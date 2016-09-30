@@ -48,6 +48,9 @@ define([
         }
 
         //Chat related functions
+        this.getChat = function(rideId){
+            return $resource(baseURL + "/rides/" + rideId + "/chatEntries").query();
+        }
 
         this.addChatEntry = function(text, rideId, userId){
           console.log(text);

@@ -8,7 +8,11 @@
 module.exports = {
 	new: function(req, res){
 		console.log("#### UserController::new " + JSON.stringify(req.session.flash));
+		if(req.session.authenticated == true)
+				res.redirect('/admins/dashboard/');
 		res.view('users/new', {layout: 'login'});
+
+
 	},
 
 	create: function(req, res, next){
@@ -48,5 +52,28 @@ module.exports = {
 			req.session.authenticated = true;
 			return res.redirect('/admins/dashboard/');
 		});
-	}
+	},
+
+	logout: function(req, res, next){
+		req.session.user = {};
+		req.session.authenticated = false;
+		return res.redirect('/users/new/');
+	},
+
+	updateuser: function(req, res, next) {
+		console.log("### saving user");
+		var userId = req.param('id');
+    User.update({
+      id: userId
+    }, req.params.all(), function userCreated(err, user) {
+      if (err) {
+        console.log(err)
+        req.session.flash = {
+          err: err
+        };
+
+      }
+      return res.redirect('/admins/dashboard');
+    });
+  }
 };

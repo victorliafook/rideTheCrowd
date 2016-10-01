@@ -26,13 +26,16 @@
                   <%= a.description %>
                 </td>
                 <td>
-                  <%= a.createdAt %>
+                  <%= sails.moment(a.createdAt).format('MM-DD-YYYY h:mm:ss a') %>
                 </td>
               </tr>
               <% }) %>
           </tbody>
         </table>
       </div>
+    </div>
+    <div class="col-lg-12">
+      <a href="/admins/addactivity" class="btn btn-primary">Create a new category</a>
     </div>
   </div>
 </div>

@@ -1,0 +1,63 @@
+<script>
+  function previewFile() {
+    var preview = document.querySelector('#imgpreview'); //selects the query named img
+    var imgstr = document.querySelector('#imgstr');
+    var file = document.querySelector('input[type=file]').files[0]; //sames as here
+    var reader = new FileReader();
+
+    reader.onloadend = function() {
+      preview.src = reader.result;
+      imgstr.value = reader.result;
+    }
+
+    if (file) {
+      reader.readAsDataURL(file); //reads the data as a URL
+    } else {
+      preview.src = "";
+    }
+  }
+</script>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+      <h2>Add a Category</h2>
+    </div>
+  </div>
+  <div class="row">
+    <form action="/activities/create" method="post">
+
+      <div class="col-lg-8">
+        <div class="form-group">
+          <label>Name</label>
+          <input class="form-control" name="name">
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <input class="form-control" name="description">
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Category image</h3>
+          </div>
+          <div class="panel-body">
+            <img class="img-circle center-block" id="imgpreview" src="" height="200" alt="Image preview...">
+            <div class="form-group">
+              <input type="file" onchange="previewFile()">
+            </div>
+
+
+          </div>
+        </div>
+
+      </div>
+      <div class="col-lg-12">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+      <input id="imgstr" type="hidden" name="image" />
+    </form>
+
+  </div>
+</div>
+</div>

@@ -1,0 +1,120 @@
+<script>
+  function previewFile() {
+    var preview = document.querySelector('#imgpreview'); //selects the query named img
+    var imgstr = document.querySelector('#imgstr');
+    var file = document.querySelector('input[type=file]').files[0]; //sames as here
+    var reader = new FileReader();
+
+    reader.onloadend = function() {
+      preview.src = reader.result;
+      imgstr.value = reader.result;
+    }
+
+    if (file) {
+      reader.readAsDataURL(file); //reads the data as a URL
+    } else {
+      preview.src = "";
+    }
+  }
+</script>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+      <h2>Edit Ride Details</h2>
+    </div>
+  </div>
+  <div class="row">
+    <form action="/rides/updateride/<%= ride.id %>" method="post">
+
+      <div class="col-lg-4">
+        <div class="form-group">
+          <label>Ride Name</label>
+          <input class="form-control" name="name" value="<%= ride.name %>">
+        </div>
+        <div class="form-group">
+          <label>Country</label>
+          <input class="form-control" name="country" value="<%= ride.country %>">
+        </div>
+        <div class="form-group">
+          <label>City</label>
+          <input class="form-control" name="city" value="<%= ride.city %>">
+        </div>
+        <div class="form-group">
+          <label>Address</label>
+          <input class="form-control" name="address" value="<%= ride.address %>">
+        </div>
+        <div class="form-group">
+          <label>Starting at</label>
+          <input class="form-control" name="datetime" value="<%= sails.moment(ride.datetime).format('MM-DD-YYYY h:mm:ss a') %>">
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="form-group">
+          <label>Owner</label>
+          <input class="form-control" value="<%= ride.owner.firstname + ' ' + ride.owner.surname %>" disabled="true">
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <input class="form-control" name="description" value="<%= ride.description %>">
+        </div>
+        <div class="form-group">
+          <label>Activity</label>
+          <input class="form-control" value="<%= ride.activity.name %>" disabled="true">
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Ride Picture</h3>
+          </div>
+          <div class="panel-body">
+            <img class="center-block" id="imgpreview" src="<%= ride.photo %>" width="200" alt="Image preview...">
+            <div class="form-group">
+              <input type="file" onchange="previewFile()">
+            </div>
+
+
+          </div>
+        </div>
+
+      </div>
+      <div class="col-lg-12">
+        <button type="submit" class="btn btn-primary">Save Ride</button>
+      </div>
+      <input id="imgstr" type="hidden" name="photo" />
+    </form>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <h2>Registered Riders</h2>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>City</th>
+              <th>Email</th>
+            </tr>
+
+          </thead>
+          <tbody>
+            <% _.each(ride.riders, function(rider){ %>
+              <tr>
+                <td>
+                  <%= rider.firstname %>
+                </td>
+                <td>
+                  <%= rider.city %>
+                </td>
+                <td>
+                  <%= rider.email %>
+                </td>
+              </tr>
+              <% }) %>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>

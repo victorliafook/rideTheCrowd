@@ -8,15 +8,17 @@
 
       <div class="tab-content">
         <% if(flash && flash.err) { %>
+      <div class="msg">
         <ul>
           <% Object.keys(flash.err).forEach(function(error){ %>
-            <li><%= JSON.stringify(flash.err[error]) %></li>
+            <li><%= flash.err[error] %></li>
           <% }) %>
         </ul>
+      </div>
         <% } %>
 
         <div id="login">
-          <h1>Welcome Back!</h1>
+          <h1>Welcome to Ride The Crowd!</h1>
 
           <form action="/users/login" method="post">
 

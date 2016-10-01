@@ -176,3 +176,8 @@ textarea {
   margin-top: -20px;
   text-align: right;
 }
+
+.msg ul li {
+  list-style: none;
+  color: #fff;
+}

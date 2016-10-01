@@ -34,7 +34,7 @@
                   <%= u.city %>
                 </td>
                 <td>
-                  <%= u.createdAt %>
+                  <%= sails.moment(u.createdAt).format('MM-DD-YYYY h:mm:ss a') %>
                 </td>
               </tr>
               <% }) %>

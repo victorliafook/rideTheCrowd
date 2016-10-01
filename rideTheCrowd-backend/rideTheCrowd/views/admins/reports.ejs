@@ -25,11 +25,9 @@
                 <td>
                   <%= r.text %>
                 </td>
+                
                 <td>
-                  <%= r.city %>
-                </td>
-                <td>
-                  <%= r.createdAt %>
+                  <%= sails.moment(r.createdAt).format('MM-DD-YYYY h:mm:ss a') %>
                 </td>
               </tr>
               <% }) %>

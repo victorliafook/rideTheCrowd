@@ -28,8 +28,7 @@ module.exports.policies = {
 
   '*': 'flash',
   AdminsController: {
-    '*': 'sessionAuth',
-    '*': 'flash'
+    '*': ['sessionauth','flash','adminEnvironment']
   }
 
   /***************************************************************************

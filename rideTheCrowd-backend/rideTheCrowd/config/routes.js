@@ -32,19 +32,9 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': {
-    view: 'users/new',
-    locals: {
-      layout: 'login'
-    }
-  },
+  '/': 'UsersController.new',
 
-  '/users/new' : {
-    view: 'users/new',
-    locals: {
-      layout: 'login'
-    }
-  }
+  '/admins/dashboard' : 'AdminsController.dashboard'
 
   /***************************************************************************
   *                                                                          *

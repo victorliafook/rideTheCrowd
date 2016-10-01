@@ -48,7 +48,8 @@ module.exports = {
       },
       usertype: {
         type: 'string',
-        enum: ['client','admin']
+        enum: ['client','admin'],
+        defaultsTo: 'client'
       },
       riding: {
         collection: 'rides',

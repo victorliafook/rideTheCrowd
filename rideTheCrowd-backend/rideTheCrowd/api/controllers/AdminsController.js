@@ -8,18 +8,27 @@
 module.exports = {
 	dashboard: function(req, res, next){
 		var user = req.session.user;
-		var userlist = [];
+		var userlist = [], ridelist = [], activitylist = [];
 
-			Users.find(function foundUsers(err, usersFound){
+		Users.find(function foundUsers(err, usersFound){
 				if(err) return next(err);
 				if(!usersFound) return next();
 				userlist = usersFound;
-				res.view({
-					user: user,
-					users: userlist
+				Rides.find(function foundRides(err, ridesFound){
+						if(err) return next(err);
+						if(!ridesFound) return next();
+						ridelist = ridesFound;
+						
+						res.view({
+							user: user,
+							users: userlist,
+							rides: ridelist,
+							activities: activitylist
+						});
 				});
-
 		});
+
+
 
 	},
 	users: function(req, res, next){
@@ -38,15 +47,17 @@ module.exports = {
 	rides: function(req, res, next){
 		var user = req.session.user;
 
-		Rides.find(function foundRides(err, ridesFound){
-			if(err) return next(err);
-			if(!ridesFound) return next();
-			rideslist = ridesFound;
-			res.view({
-				user: user,
-				rides: rideslist
+		Rides.find()
+			.populate('activity')
+			.populate('owner').exec(function foundRides(err, ridesFound){
+					if(err) return next(err);
+					if(!ridesFound) return next();
+					rideslist = ridesFound;
+					res.view({
+						user: user,
+						rides: rideslist
+					});
 			});
-		});
 	},
 	activities: function(req, res, next){
 		var user = req.session.user;

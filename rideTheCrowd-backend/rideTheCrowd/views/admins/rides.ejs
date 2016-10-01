@@ -27,7 +27,7 @@
                   <%= r.name %>
                 </td>
                 <td>
-                  <%= r.activity.name %>
+                  <%= r.activity != null ? r.activity.name : '' %>
                 </td>
                 <td>
                   <%= r.country %>

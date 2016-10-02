@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    
+
     <title></title>
     <!-- compiled css output -->
     <link href="css/ionic.app.css" rel="stylesheet">
@@ -17,9 +17,9 @@
     <script src="app/boot.js"></script>
   </head>
   <body ng-controller="AppCtrl" ng-show="ready" class="ng-hide">
-    <ion-side-menus>
+    <ion-side-menus >
       <!-- Left menu -->
-      <ion-side-menu side="left">
+      <ion-side-menu side="left" ng-if="authenticated">
         <ion-header-bar class="bar-energized">
           <h1 class="title">More?</h1>
         </ion-header-bar>
@@ -70,5 +70,6 @@
       </ion-side-menu-content>
 
     </ion-side-menus>
+
   </body>
 </html>

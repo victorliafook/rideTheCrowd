@@ -118,6 +118,16 @@
             <!-- /.navbar-collapse -->
         </nav>
       <div id="page-wrapper">
+        <% if(flash && (flash.success || flash.err)) { %>
+      <div class="alert alert-warning">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <ul>
+          <% Object.keys(flash).forEach(function(msg){ %>
+            <li><%= flash[msg] %></li>
+          <% }) %>
+        </ul>
+      </div>
+        <% } %>
 
           <%- body %>
       </div>

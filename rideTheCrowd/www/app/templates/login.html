@@ -1,15 +1,13 @@
-<ion-view>
-
-  <ion-content padding="true">
-    <ion-refresher class="spinner-balanced" on-refresh="reload()"></ion-refresher>
-    <div style="text-align:center;">
-        <input ng-model="user.id">
-				<button class="button button-balanced" ng-click="login()">
-          Login
-          <span>
-          <i class="icon ion-arrow-right-c"></i>
-					</span>
-        </button>
-    </div>
+<ion-view view-title="Login" name="login-view">
+  <ion-content class="padding">
+      <div class="list list-inset">
+          <label class="item item-input">
+              <input type="text" placeholder="Email" ng-model="user.email">
+          </label>
+          <label class="item item-input">
+              <input type="password" placeholder="Password" ng-model="user.password">
+          </label>
+      </div>
+      <button class="button button-block button-calm" ng-click="login()">Login</button>
   </ion-content>
 </ion-view>

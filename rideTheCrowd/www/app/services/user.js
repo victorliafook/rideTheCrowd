@@ -17,6 +17,10 @@ define([
           return $resource(baseURL + "/users/:id").get({id: userId});
       };
 
+      this.getUserByEmail = function(emailStr){
+         return $resource(baseURL + "/users?email=:email").query({email:emailStr});
+      }
+
     }
   ])
 });

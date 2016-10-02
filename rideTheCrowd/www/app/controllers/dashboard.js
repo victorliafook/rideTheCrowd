@@ -7,10 +7,14 @@ define([
   app.controller('DashboardCtrl', [
     '$scope',
     '$state',
+    '$localStorage',
     'eventService',
     'ridesService',
     'baseURL',
-    function ($scope, $state, eventService, ridesService, baseURL) {
+    function ($scope, $state, $localStorage, eventService, ridesService, baseURL) {
+      var authUser = $localStorage.getObject("authUser", "{}");
+      if(authUser.id == undefined)
+        $state.go('login', {});
       $scope.search = {};
       $scope.goToList = function () {
         $state.go('results', {

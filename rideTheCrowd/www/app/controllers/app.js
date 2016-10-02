@@ -9,10 +9,16 @@ define([
     '$ionicModal',
     '$ionicScrollDelegate',
     '$sce',
+    '$localStorage',
     'pageService',
-    function ($scope, $ionicModal, $ionicScrollDelegate, $sce, pageService) {
+    function ($scope, $ionicModal, $ionicScrollDelegate, $sce, $localStorage, pageService) {
       $scope.ready = true;
 
+      $scope.activeUser = $localStorage.getObject("authUser","{}");
+      $scope.authenticated = $scope.activeUser.id != undefined;
+
+      console.log("####### ID DO USUARIO " + $scope.activeUser.id);
+      console.log($scope.authenticated);
       pageService.get().then(function (pages) {
         $scope.pages = pages;
       });

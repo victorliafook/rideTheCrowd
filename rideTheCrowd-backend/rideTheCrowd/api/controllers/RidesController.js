@@ -18,8 +18,12 @@ module.exports = {
         req.session.flash = {
           err: err
         };
+      }else{
+				req.session.flash = {
+					success: "Ride details saved successfully!"
+				};
+			}
 
-      }
       return res.redirect('/admins/rides');
     });
   }

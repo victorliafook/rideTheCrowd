@@ -15,11 +15,12 @@ define([
     'baseURL',
     function ($scope, $state, $stateParams, ridesService, userService, $ionicLoading, $localStorage, baseURL) {
       console.log('entrou ride controller id:' + $stateParams.id);
-      $scope.activeUser = $localStorage.getObject("authUser",{});
+      $scope.activeUser = $localStorage.getObject("authUser","{}");
       $scope.sendingNewChatEntry = false;
       $scope.newEntry = {};
       $scope.ride = {};
       $scope.chatEntries = [];
+      $scope.userAvatarArr = [];
       ridesService.getRide($stateParams.id).$promise.then(
           function(dados){
             $scope.ride = dados;
@@ -33,26 +34,29 @@ define([
           ridesService.getChat($stateParams.id).$promise.then(
               function(chatentries){
                 $scope.chatEntries = chatentries;
+                for(var i = 0; i < chatentries.length; i++){
+
+                  userService.getUser($scope.chatEntries[i].user).$promise.then(
+                    function(userData){
+                      $scope.userAvatarArr[userData.id] = userData.photo;
+                    },
+                    function(err){
+                        console.log(JSON.stringify(err));
+                    }
+                  )['finally'](function() {
+                      //console.log("fotos: " + $scope.userAvatarArr.length);
+                  });
+
+                }
               },
               function(err){
                 console.log("Erro ao buscar chat: " + JSON.stringify(err));
               }
-          )['finally'](function() {
-
-          });
+          );
       };
 
       $scope.refreshChat();
-      $scope.getAvatar = function(userId){
-          userService.getUser(userId).$promise.then(
-            function(userData){
-              return userData.photo;
-            },
-            function(err){
-                console.log(JSON.stringify(err));
-            }
-          );
-      }
+
       $scope.goChat = function(){
         console.log("buscar chat:" + $scope.ride.id);
         $state.go('chat' , {id:$scope.ride.id});

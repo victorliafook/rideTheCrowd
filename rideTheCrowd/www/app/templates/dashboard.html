@@ -16,11 +16,11 @@
     <h3>Next Rides</h3>
     <ion-list>
       <ion-item class="item-icon-right item-avatar item-royal" ui-sref="detail({id: event.id})" ng-repeat="event in events track by event.id | limitTo:limit">
-        <img ng-src="{{event.thumb}}">
+        <img ng-src="{{event.photo}}">
         <h2 class="positive">{{event.name}}</h2>
         <p>
-          <b>{{event.city}}</b> / District {{event.district}}<br>
-          {{event.street}} {{event.number}}, {{event.zip}} {{event.city}}
+          <b>{{event.country}}</b> / City: {{event.city}}<br>
+          {{event.address}} , <span>{{event.datetime  | date:"dd/MM/yyyy 'at' h:mma"}}</span>
         </p>
         <i class="icon ion-ios-arrow-right"></i>
       </ion-item>

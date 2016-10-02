@@ -14,7 +14,7 @@
       <ion-list>
         <ion-item class="item-divider item-icon-right"><b>Chat</b> <i class="icon ion-chatboxes"></i></ion-item>
         <ion-item ng-repeat="chat in chatEntries" class="item-royal item-avatar item-icon-right">
-          <img src="getAvatar(chat.user)"/>
+          <img ng-src="{{userAvatarArr[chat.user.id]}}"/>
           {{chat.text}}
           <span class="item-note">{{chat.createdAt}}</span>
         </ion-item>

@@ -15,7 +15,7 @@ define([
                 $window.localStorage['rideTheCrowd:' + key] = JSON.stringify(value);
             },
             getObject: function(key, defaultValue) {
-                console.log("tryingo to get: " + key);
+                console.log("trying to get: " + key);
                 return JSON.parse($window.localStorage['rideTheCrowd:' + key] || defaultValue);
             },
             remove: function(key) {
